@@ -1,0 +1,18 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.dao.UserMapper">
+
+<select id="findAll" resultType="user">
+    select id,name,age,bir from t_user ;
+</select>
+
+    <select id="findById" parameterType="String" resultType="user">
+        select id,name,age,bir from t_user where id=#{id}
+    </select>
+
+    <delete id="delete" parameterType="String">
+        delete  from t_user where id=#{id}
+    </delete>
+<!--开启二级缓存-->
+    <!--要求对象必须序列化 User-->
+<cache type="com.liu.cache.RedisCache"></cache>
+</mapper>
